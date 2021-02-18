@@ -17,15 +17,15 @@ namespace ToDoList.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskID { get; set; }
         public string Title { get; set; }
-        public decimal EstimatedHours { get; set; }
-        public decimal SpendedHours { get; set; }
-        public decimal RemainingHours { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime PlanedDate { get; set; }
+        public decimal? EstimatedHours { get; set; }
+        public decimal? SpendedHours { get; set; }
+        public decimal? RemainingHours { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? PlanedDate { get; set; }
         public string Note { get; set; }
 
         [ForeignKey("Category")]
-        public int CategoryID { get; set; }
+        public int? CategoryID { get; set; }
 
         [XmlIgnore]
         public virtual Category Category { get; set; }
@@ -35,11 +35,11 @@ namespace ToDoList.Models
     {
         public int TaskID { get; set; }
         public string Title { get; set; }
-        public decimal EstimatedHours { get; set; }
-        public decimal SpendedHours { get; set; }
-        public decimal RemainingHours { get; set; }
-        public DateTime DueDate { get; set; }
-        public DateTime PlanedDate { get; set; }
+        public decimal? EstimatedHours { get; set; }
+        public decimal? SpendedHours { get; set; }
+        public decimal? RemainingHours { get; set; }
+        public DateTime? DueDate { get; set; }
+        public DateTime? PlanedDate { get; set; }
         public string Note { get; set; }
         // public int CategoryID { get; set; }
     }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -44,9 +46,9 @@ namespace ToDoList.Controllers
         public IHttpActionResult GetTask(int id)
         {
             //Find the Data
-            Task Task = dbContext.Tasks.Find(id);
+            Task task = dbContext.Tasks.Find(id);
             //if not found, return 404 status code.
-            if (Task == null)
+            if (task == null)
             {
                 return NotFound();
             }
@@ -54,18 +56,95 @@ namespace ToDoList.Controllers
             //putting into a 'friendly object format'
             TaskDto tasksDto = new TaskDto
             {
-                TaskID = Task.TaskID,
-                Title = Task.Title,
-                EstimatedHours = Task.EstimatedHours,
-                SpendedHours = Task.SpendedHours,
-                RemainingHours = Task.RemainingHours,
-                DueDate = Task.DueDate,
-                Note = Task.Note
+                TaskID = task.TaskID,
+                Title = task.Title,
+                EstimatedHours = task.EstimatedHours,
+                SpendedHours = task.SpendedHours,
+                RemainingHours = task.RemainingHours,
+                DueDate = task.DueDate,
+                Note = task.Note
 
             };
             //pass along data as 200 status code OK response
             return Ok(tasksDto);
         }
+        //Post: api/Task/AddTask
+        // FORM DATA: category JSON Object
+        [ResponseType(typeof(Task))]
+        [HttpPost]
+        public IHttpActionResult AddTask([FromBody] Task task)
+        {
+            //Will Validate according to data annotations specified on model
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            dbContext.Tasks.Add(task);
+            dbContext.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = task.TaskID }, task);
+        }
+
+        // POST: api/Task/UpdateTask/
+        // FORM DATA: Task JSON Object
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        public IHttpActionResult UpdateTask(int id, [FromBody] Task task)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != task.TaskID)
+            {
+                return BadRequest();
+            }
+
+            dbContext.Entry(task).State = EntityState.Modified;
+
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TaskExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        private bool TaskExists(int id)
+        {
+            return dbContext.Tasks.Any(c => c.TaskID == id);
+        }
+
+        // POST: api/Task/DeleteTask/5
+        [HttpPost]
+        public IHttpActionResult DeleteTask(int id)
+        {
+            Task Task = dbContext.Tasks.Find(id);
+            if (Task == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.Tasks.Remove(Task);
+            dbContext.SaveChanges();
+
+            return Ok();
+        }
 
     }
 }
+    
+
