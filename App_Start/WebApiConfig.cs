@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace ToDoList
 {
@@ -12,6 +13,11 @@ namespace ToDoList
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+
+            // Enable Cross-Orgin
+            EnableCorsAttribute cros = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cros);
+
 
             // REturn Json instead of XML
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
