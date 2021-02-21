@@ -17,9 +17,10 @@ namespace ToDoList.Controllers
         //This variable is our database access point
         private ToDoListDataContext dbContext = new ToDoListDataContext();
 
+        // GET: api/Task/GetTasks
         [ResponseType(typeof(IEnumerable<Category>))]
         [HttpGet]       
-        public IHttpActionResult GetCategory()
+        public IHttpActionResult GetCategories()
         {
             //Load data from database
             IEnumerable<Category> categories = dbContext.Categories;
@@ -35,7 +36,7 @@ namespace ToDoList.Controllers
             return Ok(CategoryDtos);
         }
 
-        // GET: api/Category/2
+        // GET: api/Task/GetTask/3
         [ResponseType(typeof(Category))]
         [HttpGet]
         public IHttpActionResult GetCategory(int id)
@@ -77,7 +78,7 @@ namespace ToDoList.Controllers
             return CreatedAtRoute("DefaultApi", new { id = category.CategoryID }, category);
         }
 
-        // POST: api/Category/UpdateCategory/
+        // POST: api/Category/UpdateCategory/4
         // FORM DATA: Category JSON Object
         [ResponseType(typeof(void))]
         [HttpPost]

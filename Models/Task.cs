@@ -17,6 +17,8 @@ namespace ToDoList.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TaskID { get; set; }
         public string Title { get; set; }
+        public int? PriorityID { get; set; }
+        public int? StateID { get; set; }
         public decimal? EstimatedHours { get; set; }
         public decimal? SpendedHours { get; set; }
         public decimal? RemainingHours { get; set; }

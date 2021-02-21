@@ -199,6 +199,10 @@
     <Compile Include="Migrations\202102172307459_20210217A.designer.cs">
       <DependentUpon>202102172307459_20210217A.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102210059357_2021-02-20A.cs" />
+    <Compile Include="Migrations\202102210059357_2021-02-20A.designer.cs">
+      <DependentUpon>202102210059357_2021-02-20A.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Task.cs" />
@@ -303,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102172307459_20210217A.resx">
       <DependentUpon>202102172307459_20210217A.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102210059357_2021-02-20A.resx">
+      <DependentUpon>202102210059357_2021-02-20A.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
