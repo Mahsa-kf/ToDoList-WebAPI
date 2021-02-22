@@ -23,22 +23,8 @@ namespace ToDoList.Controllers
         public IHttpActionResult GetTasks()
         {
             //Load data from database
-            IEnumerable<Task> tasks = dbContext.Tasks;
-
-            //Selecting data that we want to return to UI
-            IEnumerable<TaskDto> TasksDtos = tasks.Select(task => new TaskDto()
-            {
-                TaskID = task.TaskID,
-                Title = task.Title,
-                EstimatedHours = task.EstimatedHours,
-                SpendedHours = task.SpendedHours,
-                RemainingHours = task.RemainingHours,
-                DueDate = task.DueDate,
-                PlanedDate =task.PlanedDate,
-                Note = task.Note
-            });
-
-            return Ok(TasksDtos);
+            IEnumerable<Task> tasks = dbContext.Tasks.ToList();
+            return Ok(tasks);
         }
 
         // GET: api/Task/GetTask/2
@@ -63,7 +49,8 @@ namespace ToDoList.Controllers
                 SpendedHours = task.SpendedHours,
                 RemainingHours = task.RemainingHours,
                 DueDate = task.DueDate,
-                Note = task.Note
+                Note = task.Note,
+                CategoryID = task.CategoryID
 
             };
             //pass along data as 200 status code OK response

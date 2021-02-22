@@ -28,8 +28,6 @@ namespace ToDoList.Models
 
         [ForeignKey("Category")]
         public int? CategoryID { get; set; }
-
-        [XmlIgnore]
         public virtual Category Category { get; set; }
     }
 
@@ -42,7 +40,7 @@ namespace ToDoList.Models
         public decimal? RemainingHours { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? PlanedDate { get; set; }
-        public string Note { get; set; }
-        // public int CategoryID { get; set; }
+        public string Note { get; set; }  
+        public int? CategoryID { get; set; }
     }
 }
