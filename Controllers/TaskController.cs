@@ -41,20 +41,23 @@ namespace ToDoList.Controllers
             }
 
             //putting into a 'friendly object format'
-            TaskDto tasksDto = new TaskDto
+            TaskDto taskDto = new TaskDto
             {
                 TaskID = task.TaskID,
                 Title = task.Title,
+                PriorityID = task.PriorityID,
+                StateID = task.StateID,
                 EstimatedHours = task.EstimatedHours,
                 SpendedHours = task.SpendedHours,
                 RemainingHours = task.RemainingHours,
                 DueDate = task.DueDate,
+                PlanedDate = task.PlanedDate,
                 Note = task.Note,
-                CategoryID = task.CategoryID
-
+                CategoryID = task.CategoryID      
             };
+
             //pass along data as 200 status code OK response
-            return Ok(tasksDto);
+            return Ok(taskDto);
         }
 
         //Post: api/Task/AddTask
